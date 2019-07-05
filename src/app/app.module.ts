@@ -13,7 +13,7 @@ import * as bookState from './books/state/book.reducer';
     imports: [
         BrowserModule,
         AppRoutingModule,
-        StoreModule.forRoot({ Action: bookState.reducer })
+        StoreModule.forRoot({ Books: bookState.reducer })
     ],
     providers: [],
     bootstrap: [AppComponent]

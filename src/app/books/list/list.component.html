@@ -1,1 +1,8 @@
 <button (click)="add()">Add</button>
+<table>
+    <tbody></tbody>
+    <tr *ngFor="let book of books">
+        <td>{{book.name}}</td>
+        <td>{{book.price}}</td>
+    </tr>
+</table>

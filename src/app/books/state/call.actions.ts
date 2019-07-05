@@ -1,10 +1,10 @@
 import { createAction } from '@ngrx/store';
 import { Action } from 'rxjs/internal/scheduler/Action';
 export enum Actions {
-    Hold = '[Active Call] On Hold',
-    Unhold = '[Active Call] On Unhold'
+    Add = '[Books] Add',
+    Delete = '[Books] Delete'
 }
 
-export const isOnHold = createAction(Actions.Hold);
-export const isOnUnhold = createAction(Actions.Unhold);
-export const isOnUnhold2 = createAction(Actions.Unhold);
+export const addBook = createAction(Actions.Add);
+export const deleteBook = createAction(Actions.Delete);
+export const isOnUnhold2 = createAction(Actions.Delete);

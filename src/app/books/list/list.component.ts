@@ -8,14 +8,25 @@ import * as actions from './../state/call.actions';
     styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
+    books = new Array<any>();
 
-    constructor(private _store: Store<any>) { }
+    constructor(private store: Store<any>) { }
 
     ngOnInit() {
+        this.store.select('Books').subscribe((books: any) => {
+            console.log(books);
+            if (books) {
+                this.books = books.value;
+            }
+
+        });
     }
 
     add() {
-        this._store.dispatch({ type: actions.Actions.Hold });
-        console.log(this._store);
+        this.books.push({ name: 'Notebook', price: '500' });
+
+        this.store.dispatch({ type: actions.Actions.Add, value: this.books });
+
+        console.log(this.store);
     }
 }

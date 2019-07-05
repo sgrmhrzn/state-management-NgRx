@@ -6,6 +6,10 @@ const routes: Routes = [
         path: 'books-list',
         loadChildren: './books/books.module#BooksModule'
     },
+    {
+        path: 'authors-list',
+        loadChildren: './authors/authors.module#AuthorsModule'
+    }
 ];
 
 
