@@ -1,10 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
-import * as bookState from './books/state/book.reducer';
+import * as bookState from './module/books/state/book.reducer';
+import * as cartState from './module/books/state/cart-state/cart.reducer';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from 'src/environments/environment.prod';
+import { SharedService } from './service/shared.service';
+import * as fromCart from './module/books/state/cart-state/cart.reducer';
 
 @NgModule({
     declarations: [
@@ -13,9 +17,14 @@ import * as bookState from './books/state/book.reducer';
     imports: [
         BrowserModule,
         AppRoutingModule,
-        StoreModule.forRoot({ Books: bookState.reducer })
+        StoreModule.forRoot({ cart: fromCart.reducer }),
+        StoreDevtoolsModule.instrument({
+            name: 'State Management with Ngrx',
+            maxAge: 25,
+            logOnly: environment.production
+        })
     ],
-    providers: [],
+    providers: [SharedService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

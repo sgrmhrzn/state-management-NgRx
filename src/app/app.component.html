@@ -34,10 +34,38 @@
                 <a class="nav-link disabled" href="#">Disabled</a>
             </li> -->
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <div class="form-inline my-2 my-lg-0">
+            <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
+         -->
+            <button class="btn btn-outline-success my-2 my-sm-0" (click)="showCartItems = !showCartItems"><i
+                    class="fa fa-shopping-cart"></i>
+                {{cart.length}}</button>
+
+            <div *ngIf="showCartItems" class="table">
+                <div class="heading">
+                    <div></div>
+                    <div>Name</div>
+                    <div>Qty</div>
+                    <div>Rate</div>
+                    <div>Total</div>
+                </div>
+                <div *ngFor="let item of cart;let i = index">
+                    {{i + 1}}
+                    <div>{{item.Name}}</div>
+                    <div>{{item.Quantity}}</div>
+                    <div>{{item.Price}}</div>
+                    <div>{{item.Total}}</div>
+                </div>
+                <div>
+                    <div></div>
+                    <div>Net Total</div>
+                    <div></div>
+                    <div></div>
+                    <div>{{getNetTotal()}}</div>
+                </div>
+            </div>
+        </div>
     </div>
 </nav>
 <router-outlet></router-outlet>
