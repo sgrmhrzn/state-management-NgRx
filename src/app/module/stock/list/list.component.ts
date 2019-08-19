@@ -1,22 +1,19 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { BookModel } from 'src/app/models/book.model';
+import { CartModel } from 'src/app/models/cart.model';
 import { Store, select } from '@ngrx/store';
+import { SharedService } from 'src/app/shared/service/shared.service';
+import { takeWhile } from 'rxjs/operators';
+import { FilterState } from '../../books/filter/state/filter.reducer';
 import * as actions from '../state/book.actions';
 import * as fromRoot from '../../../app-state/app.state';
-import * as fromCart from './../state/cart-state/index';
-import { takeWhile, map, filter } from 'rxjs/operators';
-import { BookModel } from 'src/app/models/book.model';
-import { SharedService } from 'src/app/shared/service/shared.service';
-import { CartModel } from 'src/app/models/cart.model';
-import * as fromFilter from './../filter/state/index';
-import { FilterState } from '../filter/state/filter.reducer';
+
 
 @Component({
     selector: 'app-list',
     templateUrl: './list.component.html',
     styleUrls: ['./list.component.scss']
 })
-
-
 export class ListComponent implements OnInit, OnDestroy {
 
     books: Array<BookModel>;
@@ -53,34 +50,34 @@ export class ListComponent implements OnInit, OnDestroy {
         ];
 
         this.booksDB = this.books;
-        this.store.pipe(
-            select(fromCart.getCartItems),
-            takeWhile(() => this.componentActive)
-        ).subscribe(
-            books => {
-                console.log('sdf');
-                this.cartItems = books;
-            }
-        );
+        // this.store.pipe(
+        //     select(fromCart.getCartItems),
+        //     takeWhile(() => this.componentActive)
+        // ).subscribe(
+        //     books => {
+        //         console.log('sdf');
+        //         this.cartItems = books;
+        //     }
+        // );
 
-        this.store.pipe(
-            select(fromFilter.getFilters),
-        ).subscribe(
-            filters => {
-                // this.filters = filters;
-                console.log(filters);
+        // this.store.pipe(
+        //     select(fromFilter.getFilters),
+        // ).subscribe(
+        //     filters => {
+        //         // this.filters = filters;
+        //         console.log(filters);
 
-                if (filters.FilterGenre.IsActive && !filters.FilterLanguage.IsActive) {
-                    this.updateWithGenreFilter(filters);
-                }
-                if (filters.FilterLanguage.IsActive && !filters.FilterGenre.IsActive) {
-                    this.updateWithLanguageFilter(filters);
-                }
-                if (filters.FilterGenre.IsActive && filters.FilterLanguage.IsActive) {
-                    this.updateWithLanguageAndGenreFilters(filters);
-                }
-            }
-        );
+        //         if (filters.FilterGenre.IsActive && !filters.FilterLanguage.IsActive) {
+        //             this.updateWithGenreFilter(filters);
+        //         }
+        //         if (filters.FilterLanguage.IsActive && !filters.FilterGenre.IsActive) {
+        //             this.updateWithLanguageFilter(filters);
+        //         }
+        //         if (filters.FilterGenre.IsActive && filters.FilterLanguage.IsActive) {
+        //             this.updateWithLanguageAndGenreFilters(filters);
+        //         }
+        //     }
+        // );
 
 
         this.shared.pageLoaded = true;
@@ -143,3 +140,4 @@ export class ListComponent implements OnInit, OnDestroy {
         this.componentActive = false;
     }
 }
+

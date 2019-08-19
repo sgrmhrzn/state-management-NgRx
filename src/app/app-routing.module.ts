@@ -1,14 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { LayoutComponent } from './module/layout/component/layout.component';
 
 const routes: Routes = [
     {
-        path: 'books-list',
-        loadChildren: './module/books/books.module#BooksModule'
-    },
-    {
-        path: 'authors-list',
-        loadChildren: './module/authors/authors.module#AuthorsModule'
+        path: '',
+        loadChildren: './module/layout/layout.module#LayoutModule',
+
     }
 ];
 

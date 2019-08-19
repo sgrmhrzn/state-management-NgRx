@@ -1,9 +1,10 @@
-<app-filter>
-
-</app-filter>
+Test
 <div class="container">
-    <!-- <button (click)="click()">Click</button>
+    <button (click)="click()">Click</button>
     <div class="row">
+        <!-- <div class="col-2">
+            <button class="btn btn-success" (click)="add()">Add</button>
+        </div> -->
         <div class="col">
             <table class="table">
                 <thead class="thead-dark">
@@ -31,22 +32,6 @@
                 </tbody>
             </table>
         </div>
-    </div> -->
-    <!-- <router-outlet></router-outlet> -->
-
-    <div class="row">
-        <div class="col-sm-6" *ngFor="let book of books;let i = index" [attr.data-index]="i">
-            <div class="card">
-                <!-- <div class="card-header">{{book.Name}}</div> -->
-                <div class="card-body">
-                    <h5 class="card-title">{{book.Name}}</h5>
-                    <p class="card-text">Language: {{book.Language.DisplayTitle}}<br/>
-                        Genre: {{book.Genre.DisplayTitle}}<br/>
-                        Price: {{book.Price}}
-                    </p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
+<!-- <router-outlet></router-outlet> -->

@@ -6,13 +6,20 @@ import { ListComponent } from './list/list.component';
 import { StoreModule } from '@ngrx/store';
 import * as bookState from './state/book.reducer';
 import * as cartState from './state/cart-state/cart.reducer';
+import * as filterState from './filter/state/filter.reducer';
+import { SearchComponent } from './search/search.component';
+import { FilterComponent } from './filter/filter.component';
+import { FormsModule } from '@angular/forms';
+import { WrapperComponent } from './wrapper/wrapper.component';
+
 
 @NgModule({
-    declarations: [ListComponent],
+    declarations: [ListComponent, SearchComponent, FilterComponent, WrapperComponent],
     imports: [
         CommonModule,
         BooksRoutingModule,
-        // StoreModule.forFeature('cart', cartState.reducer)
+        FormsModule,
+        StoreModule.forFeature('filters', filterState.reducer)
     ]
 })
 export class BooksModule { }

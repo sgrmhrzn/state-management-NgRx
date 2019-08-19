@@ -1,0 +1,70 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <a class="navbar-brand" href="#">Demo</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/books-list">Books</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/stock">Stock</a>
+            </li>
+            <!-- <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Dropdown
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" routerLink="books-list">Books</a>
+                    <a class="dropdown-item" routerLink="authors-list">Authors</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
+            </li> -->
+        </ul>
+        <div class="form-inline my-2 my-lg-0">
+            <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+         -->
+            <button class="btn btn-outline-success my-2 my-sm-0" (click)="showCartItems = !showCartItems"><i
+                    class="fa fa-shopping-cart"></i>
+                {{cart.length}}</button>
+
+            <div *ngIf="showCartItems" class="table">
+                <div class="heading">
+                    <div></div>
+                    <div>Name</div>
+                    <div>Qty</div>
+                    <div>Rate</div>
+                    <div>Total</div>
+                </div>
+                <div *ngFor="let item of cart;let i = index">
+                    {{i + 1}}
+                    <div>{{item.Name}}</div>
+                    <div>{{item.Quantity}}</div>
+                    <div>{{item.Price}}</div>
+                    <div>{{item.Total}}</div>
+                </div>
+                <div>
+                    <div></div>
+                    <div>Net Total</div>
+                    <div></div>
+                    <div></div>
+                    <div>{{getNetTotal()}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
