@@ -3,10 +3,13 @@ import { BookModel } from 'src/app/models/book.model';
 import { CartModel } from 'src/app/models/cart.model';
 import { Store, select } from '@ngrx/store';
 import { SharedService } from 'src/app/shared/service/shared.service';
-import { takeWhile } from 'rxjs/operators';
 import { FilterState } from '../../books/filter/state/filter.reducer';
-import * as actions from '../state/book.actions';
+import * as actions from '../state/stock.actions';
 import * as fromRoot from '../../../app-state/app.state';
+import * as fromStock from './../state/index';
+import { StockState } from '../state/stock.reducer';
+import { Subscription } from 'rxjs';
+
 
 
 @Component({
@@ -20,34 +23,22 @@ export class ListComponent implements OnInit, OnDestroy {
     componentActive = true;
     cartItems: Array<CartModel> = [];
     booksDB: BookModel[];
+    subscription: Subscription;
 
-    constructor(private store: Store<fromRoot.State>, private shared: SharedService) { }
+    constructor(private store: Store<StockState>, private shared: SharedService) { }
 
     ngOnInit() {
 
         this.books = new Array<BookModel>();
-        this.books = [
-            {
-                Id: '1', Name: 'Notebook', Price: 500,
-                Language: { DisplayTitle: 'English', Key: 'eng' },
-                Genre: { DisplayTitle: 'Romantic', Key: 'rom' }
-            },
-            {
-                Id: '2', Name: 'Nepali', Price: 400,
-                Language: { DisplayTitle: 'Nepali', Key: 'nep' },
-                Genre: { DisplayTitle: 'Academic', Key: 'aca' }
-            },
-            {
-                Id: '3', Name: 'English', Price: 700,
-                Language: { DisplayTitle: 'English', Key: 'eng' },
-                Genre: { DisplayTitle: 'Academic', Key: 'Academic' }
-            },
-            {
-                Id: '4', Name: 'Science', Price: 220,
-                Language: { DisplayTitle: 'English', Key: 'eng' },
-                Genre: { DisplayTitle: 'Academic', Key: 'aca' }
-            }
-        ];
+        this.subscription = this.store.pipe(select(fromStock.getBooks)).subscribe((resp: BookModel[]) => {
+            console.log(resp);
+            this.books = resp;
+        });
+
+
+        // this.shared.getStock().subscribe((response: Array<BookModel>) => {
+        //     this.books = response;
+        // });
 
         this.booksDB = this.books;
         // this.store.pipe(
@@ -119,25 +110,14 @@ export class ListComponent implements OnInit, OnDestroy {
 
     add() {
 
-        this.store.dispatch({ type: actions.Actions.Add, value: this.books });
+        this.store.dispatch({ type: actions.StockActionTypes.Add, value: this.books });
 
         console.log(this.store);
     }
 
-    addToCart(book: BookModel) {
-        const existingItem = this.cartItems.find(x => x.Id === book.Id);
-        if (existingItem) {
-            existingItem.Quantity += 1;
-            existingItem.Total = book.Price * existingItem.Quantity;
-        } else {
-            this.cartItems.push({ Id: book.Id, Name: book.Name, Quantity: 1, Price: book.Price, Total: book.Price * 1 });
-        }
-
-        this.store.dispatch({ type: actions.Actions.AddToCart, items: this.cartItems });
-    }
-
     ngOnDestroy(): void {
         this.componentActive = false;
+        this.subscription.unsubscribe();
     }
 }
 

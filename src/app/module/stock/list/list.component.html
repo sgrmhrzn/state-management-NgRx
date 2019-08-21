@@ -1,6 +1,4 @@
-Test
-<div class="container">
-    <button (click)="click()">Click</button>
+    <button routerLink="form">Click</button>
     <div class="row">
         <!-- <div class="col-2">
             <button class="btn btn-success" (click)="add()">Add</button>
@@ -25,13 +23,13 @@ Test
                         <td>{{book.Genre.DisplayTitle}}</td>
                         <td>{{book.Price}}</td>
                         <td>
-                            <button class="btn btn-success" (click)="addToCart(book)"><i
-                                    class="fa fa-cart-plus"></i></button>
+                            <button class="btn btn-success" routerLink="form/{{book.Id}}"><i
+                                    class="fa fa-edit"></i></button>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
-</div>
+
 <!-- <router-outlet></router-outlet> -->

@@ -44,7 +44,8 @@
                         Genre: {{book.Genre.DisplayTitle}}<br/>
                         Price: {{book.Price}}
                     </p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <button class="btn btn-success" (click)="addToCart(book)"><i
+                        class="fa fa-cart-plus"></i> Add to Cart</button>
                 </div>
             </div>
         </div>
