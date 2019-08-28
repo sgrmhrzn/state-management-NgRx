@@ -5,6 +5,7 @@ import { takeWhile } from 'rxjs/operators';
 import { CartModel } from 'src/app/models/cart.model';
 import * as fromRoot from './../../../app-state/app.state';
 import * as fromCart from './../../../module/books/state/cart-state/index';
+import { RemoveFromCart } from 'src/app/module/books/state/cart-state/cart.action';
 
 @Component({
     selector: 'app-header',
@@ -21,15 +22,9 @@ export class HeaderComponent implements OnInit {
     ngOnInit(): void {
         this.componentActive = true;
 
-        this.store.pipe(
-            select(fromCart.getCartItems),
-            takeWhile(() => this.componentActive)
-        ).subscribe(
-            items => {
-                this.cart = items;
-                console.log(this.cart);
-            }
-        );
+        this.store.pipe(select(fromCart.getCartItems)).subscribe(items => {
+            this.cart = items;
+        });
     }
 
     getNetTotal() {
@@ -38,4 +33,7 @@ export class HeaderComponent implements OnInit {
         return netTotal;
     }
 
+    remove(id: number) {
+        this.store.dispatch(new RemoveFromCart(id));
+    }
 }

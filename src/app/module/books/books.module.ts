@@ -4,8 +4,6 @@ import { CommonModule } from '@angular/common';
 import { BooksRoutingModule } from './books-routing.module';
 import { ListComponent } from './list/list.component';
 import { StoreModule } from '@ngrx/store';
-import * as bookState from './state/book.reducer';
-import * as cartState from './state/cart-state/cart.reducer';
 import * as filterState from './filter/state/filter.reducer';
 import { SearchComponent } from './search/search.component';
 import { FilterComponent } from './filter/filter.component';

@@ -1,20 +1,22 @@
-<form class="col-6">
+<form class="col-6" *ngIf="book" (submit)="onSubmit()">
     <div class="form-group">
         <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" aria-describedby="name"
-            placeholder="Name" [(ngModel)]='book.Name' [ngModelOptions]="{standalone: true}">
+        <input type="text" class="form-control" id="name" aria-describedby="name" placeholder="Name"
+            [(ngModel)]='book.Name' [ngModelOptions]="{standalone: true}">
         <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
     </div>
     <div class="form-group">
         <label for="exampleInputPassword1">Language</label>
-        <select class="form-control" (change)="optionChange(0)" [(ngModel)]='book.Language.Key' [ngModelOptions]="{standalone: true}">
+        <select class="form-control" (change)="optionChange(0)" [(ngModel)]='book.Language.Key'
+            [ngModelOptions]="{standalone: true}">
             <option value="">Select</option>
             <option *ngFor="let lang of languages" [value]="lang.Key">{{lang.DisplayTitle}}</option>
         </select>
     </div>
     <div class="form-group">
         <label for="exampleInputPassword1">Genre</label>
-        <select class="form-control" (change)="optionChange(1)" [(ngModel)]='book.Genre.Key' [ngModelOptions]="{standalone: true}">
+        <select class="form-control" (change)="optionChange(1)" [(ngModel)]='book.Genre.Key'
+            [ngModelOptions]="{standalone: true}">
             <option value="">Select</option>
             <option *ngFor="let gen of genres" [value]="gen.Key">{{gen.DisplayTitle}}</option>
         </select>
@@ -25,9 +27,9 @@
     </div> -->
     <div class="form-group">
         <label for="price">Price</label>
-        <input type="email" class="form-control" id="price" aria-describedby="book.Price" [(ngModel)]="price"
+        <input type="email" class="form-control" id="price" aria-describedby="price" [(ngModel)]="book.Price"
             placeholder="Price" [ngModelOptions]="{standalone: true}">
         <!-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> -->
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary" click="onSubmit()">Submit</button>
 </form>

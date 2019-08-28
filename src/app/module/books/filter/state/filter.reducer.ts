@@ -1,5 +1,4 @@
 
-import { createReducer, on, Action, ActionReducer } from '@ngrx/store';
 import * as fromFilterActions from './filter.action';
 import { FilterModel } from 'src/app/models/filter.model';
 
@@ -22,12 +21,12 @@ export const InitialState: FilterState = {
 
 export function reducer(state: FilterState = InitialState, action: fromFilterActions.FilterActions): FilterState {
     switch (action.type) {
-        case fromFilterActions.FilterTypes.Language:
+        case fromFilterActions.FilterTypes.ToggleLanguage:
             return {
                 ...state,
                 FilterLanguage: action.payload
             };
-        case fromFilterActions.FilterTypes.Genre:
+        case fromFilterActions.FilterTypes.ToggleGenre:
             return {
                 ...state,
                 FilterGenre: action.payload

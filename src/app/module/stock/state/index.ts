@@ -22,7 +22,7 @@ export const getBook = createSelector(
         if (selectedStockId === 0) {
             const book: BookModel = {
                 Name: '',
-                Id: 0,
+                id: 0,
                 Price: 0,
                 Language: {
                     DisplayTitle: '',
@@ -35,7 +35,7 @@ export const getBook = createSelector(
             }
             return book;
         } else {
-            return selectedStockId ? state.books.find(p => p.Id === selectedStockId) : null;
+            return selectedStockId ? state.books.find(p => p.id === selectedStockId) : null;
         }
     }
 );

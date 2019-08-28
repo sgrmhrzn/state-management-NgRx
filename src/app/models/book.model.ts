@@ -1,6 +1,6 @@
 export interface BookModel {
     Name: string;
-    Id: number;
+    id: number;
     Price: number;
     Language: KeyValueModel;
     Genre: KeyValueModel;

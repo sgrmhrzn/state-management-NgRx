@@ -6,11 +6,10 @@
                 [(ngModel)]="languageFilter.IsActive" (change)="filterOptionChange(0)" />
             <label class="form-check-label" for="exampleCheck1">Language</label>
         </div>
-        <select class="form-control" (change)="filterOptionChange(0)" [(ngModel)]='languageFilter.Value'>
+        <select class="form-control" (change)="filterOptionChange(0)" [(ngModel)]='languageFilter.Value'
+            [ngModelOptions]="{standalone: true}">
             <option value="">Select</option>
-            <option value="eng">English</option>
-            <option value="nep">Nepali</option>
-            <option value="hin">Hindi</option>
+            <option *ngFor="let lang of languages" [value]="lang.Key">{{lang.DisplayTitle}}</option>
         </select>
     </div>
 
@@ -20,30 +19,12 @@
                 [(ngModel)]="genreFilter.IsActive" (change)="filterOptionChange(1)" />
             <label class="form-check-label" for="exampleCheck1">Genre</label>
         </div>
-        <select class="form-control" (change)="filterOptionChange(1)" [(ngModel)]='genreFilter.Value'>
+        <select class="form-control" (change)="filterOptionChange(1)" [(ngModel)]='genreFilter.Value'
+            [ngModelOptions]="{standalone: true}">
             <option value="">Select</option>
-            <option value="fic">Fiction</option>
-            <option value="rom">Romantic</option>
-            <option value="aca">Academic</option>
+            <option *ngFor="let gen of genres" [value]="gen.Key">{{gen.DisplayTitle}}</option>
         </select>
     </div>
 
-    <!-- <div class="form-group">
 
-        <label>Genre</label>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="Fiction" value="fiction" />
-            <label class="form-check-label" for="exampleCheck1">Fiction</label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="Fiction" value="romantic" />
-            <label class="form-check-label" for="exampleCheck1">Romantic</label>
-        </div>
-        <div class="form-check">
-            <input class="form-check-input" type="checkbox" name="Fiction" value="academic" />
-            <label class="form-check-label" for="exampleCheck1">Academic</label>
-        </div>
-    </div>
-
-    {{filters}} -->
 </div>

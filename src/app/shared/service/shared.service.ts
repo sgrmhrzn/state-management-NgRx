@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { BookModel, KeyValueModel } from 'src/app/models/book.model';
 import { catchError, tap, map } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'
@@ -23,6 +23,16 @@ export class SharedService {
             );
     }
 
+
+    add(book: BookModel): Observable<BookModel> {
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        book.id = 5;
+        return this.http.post<BookModel>(`${this.url}stock`, book, { headers: headers })
+            .pipe(
+                tap(data => console.log('add: ' + JSON.stringify(data))),
+                catchError(this.handleError)
+            );
+    }
 
     getLanguages(): Observable<KeyValueModel[]> {
         return this.http.get<KeyValueModel[]>(`${this.url}languages`)

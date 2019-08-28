@@ -8,13 +8,15 @@ export interface StockState {
     currentStockId: number;
     language: KeyValueModel[];
     genre: KeyValueModel[];
+    error: any;
 }
 
 export const initialState: StockState = {
     books: [],
     currentStockId: 0,
     language: [],
-    genre: []
+    genre: [],
+    error: null
 };
 
 
@@ -22,26 +24,9 @@ export interface StockAction extends Action {
     payload: any;
 }
 
-// const scoreboardReducer = createReducer(
-//     initialState,
-//     on(CallAction.addBook, state => ({ ...state, value: true })),
-//     on(CallAction.deleteBook, state => ({ ...state, value: false })),
-// );
-
-// const scoreboardReducer2 = createReducer(
-//     initialState,
-//     on(CallAction.addBook, state => ({ ...state, value: true })),
-//     on(CallAction.deleteBook, state => ({ ...state, value: false })),
-// );
-
 export function reducer(state: StockState = initialState, action: StockAction): any {
 
     switch (action.type) {
-        case StockActionTypes.Add:
-            return {
-                ...state,
-                books: action.payload
-            };
         case StockActionTypes.LoadSuccess:
             return {
                 ...state,
@@ -53,7 +38,19 @@ export function reducer(state: StockState = initialState, action: StockAction): 
             return {
                 ...state,
                 currentStockId: action.payload
-            }
+            };
+        case StockActionTypes.AddBookInStockSuccess:
+            return {
+                ...state,
+                books: [...state.books, action.payload],
+                error: ''
+            };
+        case StockActionTypes.UpdateBookInStockSuccess:
+            return {
+                ...state,
+                books: [...state.books, action.payload],
+                error: ''
+            };
         case StockActionTypes.Delete:
             return {
                 ...state,
@@ -63,7 +60,3 @@ export function reducer(state: StockState = initialState, action: StockAction): 
             return state;
     }
 }
-
-// export function reducer2(state: State | undefined, action: Action): any {
-//     return scoreboardReducer2(state, action);
-// }

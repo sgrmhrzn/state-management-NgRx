@@ -4,21 +4,15 @@ import { StockState } from './stock.reducer';
 export enum StockActionTypes {
     Add = '[Books] Add',
     Delete = '[Books] Delete',
-    Load = '[Books] Loaded',
+    Load = '[Books] Load',
     LoadSuccess = '[Books] LoadSuccess',
     LoadFail = '[Books] LoadFail',
-    SelectedStockId = '[Stocks] selectedStockId'
+    SelectedStockId = '[Stocks] selectedStockId',
+    AddBookInStockSuccess = '[Stocks] Add',
+    AddBookInStockError = '[Stocks] AddError',
+    UpdateBookInStockSuccess = '[Stocks] Update'
 }
 
-// export const addBook = createAction(Actions.Add);
-// export const deleteBook = createAction(Actions.Delete);
-// export const isOnUnhold2 = createAction(Actions.Delete);
-
-export class NewBookAdd implements Action {
-    readonly type = StockActionTypes.Add;
-
-    constructor(public payload: BookModel[]) { }
-}
 
 export class Load implements Action {
     readonly type = StockActionTypes.Load;
@@ -43,7 +37,15 @@ export class SelectedStockId implements Action {
 
     constructor(public payload: number) { }
 }
+export class AddBook implements Action {
+    readonly type = StockActionTypes.Add;
 
+    constructor(public payload: BookModel) { }
+}
+export class AddBookSuccess implements Action {
+    readonly type = StockActionTypes.AddBookInStockSuccess;
+
+    constructor(public payload: BookModel) { }
+}
 // Union the valid types
-export type StockActions = NewBookAdd
-    | LoadSuccess | LoadFail | Load | SelectedStockId;
+export type StockActions = LoadSuccess | LoadFail | Load | SelectedStockId | AddBook | AddBookSuccess;

@@ -30,7 +30,6 @@ import { StockEffects } from './module/stock/state/stock.effects';
             maxAge: 25,
             logOnly: environment.production
         }),
-        // EffectsModule.forRoot([])
         EffectsModule.forRoot([StockEffects])
     ],
     providers: [SharedService],

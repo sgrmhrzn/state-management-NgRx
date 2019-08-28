@@ -9,15 +9,8 @@ import * as stockActions from './module/stock/state/stock.actions';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-    showCartItems = false;
-
-    componentActive = false;
     title = 'ngrx';
-    cart: CartModel[] = [];
-
     constructor(private store: Store<StockState>) {
         this.store.dispatch(new stockActions.Load());
     }
-
-
 }

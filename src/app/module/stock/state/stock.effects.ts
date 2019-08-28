@@ -34,4 +34,17 @@ export class StockEffects {
         )
     );
 
+    @Effect()
+    addBook$: Observable<Action> = this.actions$.pipe(
+        ofType(StockActionTypes.Add),
+        map((action: stockActions.AddBook) => action.payload),
+        mergeMap(book =>
+            this.sharedService.add(book).pipe(
+                map(() => {
+                    return new stockActions.AddBookSuccess(book);
+                }),
+                catchError(err => of(new stockActions.LoadFail(err)))
+            )
+        )
+    );
 }

@@ -1,28 +1,22 @@
 import { createAction, Action } from '@ngrx/store';
 import { FilterModel } from 'src/app/models/filter.model';
 export enum FilterTypes {
-    Language = '[LanguageFilter] Language',
-    Genre = '[LanguageFilter] Genre',
+    ToggleLanguage = '[LanguageFilter] Language',
+    ToggleGenre = '[LanguageFilter] Genre',
 }
 
-export class ToogleLanguageFilter implements Action {
-    readonly type = FilterTypes.Language;
+export class ToggleLanguageFilter implements Action {
+    readonly type = FilterTypes.ToggleLanguage;
 
     constructor(public payload: FilterModel) { }
 }
 
-export class ToogleGenreFilter implements Action {
-    readonly type = FilterTypes.Genre;
+export class ToggleGenreFilter implements Action {
+    readonly type = FilterTypes.ToggleGenre;
 
     constructor(public payload: FilterModel) { }
 }
-
-// export class ToogleHindiFilter implements Action {
-//     readonly type = FilterTypes.Hindi;
-
-//     constructor(public payload: boolean) { }
-// }
 
 // Union the valid types
-export type FilterActions = ToogleLanguageFilter
-    | ToogleGenreFilter
+export type FilterActions = ToggleLanguageFilter
+    | ToggleGenreFilter;

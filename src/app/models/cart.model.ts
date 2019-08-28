@@ -1,7 +1,7 @@
 export interface CartModel {
     Name: string;
-    Id: number;
+    id: number;
     Price: number;
-    Total: number;
-    Quantity: number;
+    Total?: number;
+    Quantity?: number;
 };

@@ -1,15 +1,14 @@
 
-import { createReducer, on, Action, ActionReducer } from '@ngrx/store';
-import * as CartActions from './cart.action';
-import { BookModel } from '../../../../models/book.model';
+import { Action } from '@ngrx/store';
 import { CartModel } from 'src/app/models/cart.model';
+import { CartActionType } from './cart.action';
 
 export interface CartState {
     items: CartModel[];
 }
 
 export interface CartAction extends Action {
-    items: CartModel[];
+    payload: any;
 }
 
 export const InitialState: CartState = {
@@ -17,21 +16,36 @@ export const InitialState: CartState = {
 };
 
 export function reducer(state: CartState = InitialState, action: CartAction): CartState {
-    // return scoreboardReducer(state, action);
+    let existingItem;
     switch (action.type) {
-        case CartActions.Actions.AddToCart:
+        case CartActionType.AddToCart:
+            existingItem = state.items.find(x => x.id === action.payload.id);
+
+            if (existingItem) {
+                existingItem.Quantity += 1;
+                existingItem.Total = existingItem.Price * existingItem.Quantity;
+            } else {
+                action.payload.Quantity = 1;
+                action.payload.Total = action.payload.Price * action.payload.Quantity;
+                state.items.push(action.payload);
+            }
+
             return {
                 ...state,
-                items: action.items
+                items: state.items
             };
-        case CartActions.Actions.RemoveFromCart:
+        case CartActionType.RemoveFromCart:
+            existingItem = state.items
+                                .find(x => x.id === action.payload);
+            const index = state.items.indexOf(existingItem);
+            state.items.splice(index, 1);
             return {
                 ...state,
-                items: action.items
+                items: state.items
             };
         default:
             return state;
-            
+
     }
     // localStorage.setItem(key, JSON.stringify(nextState));
 }
