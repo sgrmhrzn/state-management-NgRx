@@ -1,6 +1,7 @@
 
 import * as fromFilterActions from './filter.action';
 import { FilterModel } from 'src/app/models/filter.model';
+import { FilterTypes } from './filter.action';
 
 
 export interface FilterState {
@@ -21,12 +22,12 @@ export const InitialState: FilterState = {
 
 export function reducer(state: FilterState = InitialState, action: fromFilterActions.FilterActions): FilterState {
     switch (action.type) {
-        case fromFilterActions.FilterTypes.ToggleLanguage:
+        case FilterTypes.ToggleLanguage:
             return {
                 ...state,
                 FilterLanguage: action.payload
             };
-        case fromFilterActions.FilterTypes.ToggleGenre:
+        case FilterTypes.ToggleGenre:
             return {
                 ...state,
                 FilterGenre: action.payload

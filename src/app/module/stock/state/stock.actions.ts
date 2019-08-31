@@ -10,7 +10,10 @@ export enum StockActionTypes {
     SelectedStockId = '[Stocks] selectedStockId',
     AddBookInStockSuccess = '[Stocks] Add',
     AddBookInStockError = '[Stocks] AddError',
-    UpdateBookInStockSuccess = '[Stocks] Update'
+    Update = '[Stocks] Update',
+    UpdateBookInStockSuccess = '[Stocks] UpdateSuccess',
+    UpdateBookInStockError = '[Stocks] UpdateError',
+
 }
 
 
@@ -32,6 +35,24 @@ export class LoadFail implements Action {
     constructor(public payload: string) { }
 }
 
+export class Update implements Action {
+    readonly type = StockActionTypes.Update;
+
+    constructor(public payload: any) { }
+}
+
+export class UpdateSuccess implements Action {
+    readonly type = StockActionTypes.UpdateBookInStockSuccess;
+
+    constructor(public payload: any) { }
+}
+
+export class UpdateBookError implements Action {
+    readonly type = StockActionTypes.UpdateBookInStockError;
+
+    constructor(public payload: string) { }
+}
+
 export class SelectedStockId implements Action {
     readonly type = StockActionTypes.SelectedStockId;
 
@@ -48,4 +69,7 @@ export class AddBookSuccess implements Action {
     constructor(public payload: BookModel) { }
 }
 // Union the valid types
-export type StockActions = LoadSuccess | LoadFail | Load | SelectedStockId | AddBook | AddBookSuccess;
+export type StockActions =
+    LoadSuccess | LoadFail | Load
+    | SelectedStockId | AddBook | AddBookSuccess
+    | Update | UpdateSuccess | UpdateBookError;

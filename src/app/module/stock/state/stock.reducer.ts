@@ -46,9 +46,12 @@ export function reducer(state: StockState = initialState, action: StockAction): 
                 error: ''
             };
         case StockActionTypes.UpdateBookInStockSuccess:
+            const updatedBooks = state.books.map(
+                item => action.payload.id === item.id ? action.payload : item);
             return {
                 ...state,
-                books: [...state.books, action.payload],
+                books: updatedBooks,
+                currentStockId: action.payload.id,
                 error: ''
             };
         case StockActionTypes.Delete:

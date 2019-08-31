@@ -47,4 +47,18 @@ export class StockEffects {
             )
         )
     );
+
+    @Effect()
+    update$: Observable<Action> = this.actions$.pipe(
+        ofType(StockActionTypes.Update),
+        map((action: stockActions.Update) => action.payload),
+        mergeMap(book =>
+            this.sharedService.update(book).pipe(
+                map(() => {
+                    return new stockActions.UpdateSuccess(book);
+                }),
+                catchError(err => of(new stockActions.LoadFail(err)))
+            )
+        )
+    );
 }

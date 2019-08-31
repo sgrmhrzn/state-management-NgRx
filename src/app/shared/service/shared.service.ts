@@ -26,10 +26,19 @@ export class SharedService {
 
     add(book: BookModel): Observable<BookModel> {
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-        book.id = 5;
         return this.http.post<BookModel>(`${this.url}stock`, book, { headers: headers })
             .pipe(
                 tap(data => console.log('add: ' + JSON.stringify(data))),
+                catchError(this.handleError)
+            );
+    }
+
+
+    update(book: BookModel): Observable<BookModel> {
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        return this.http.put<BookModel>(`${this.url}stock/${book.id}`, book, { headers: headers })
+            .pipe(
+                tap(data => console.log('update: ' + JSON.stringify(data))),
                 catchError(this.handleError)
             );
     }

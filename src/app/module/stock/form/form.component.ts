@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import * as fromStock from './../state/index';
 import { Store, select } from '@ngrx/store';
 import { StockState } from '../state/stock.reducer';
 import { BookModel, KeyValueModel } from 'src/app/models/book.model';
-import { SelectedStockId, AddBook } from './../state/stock.actions';
-import { zip } from 'rxjs';
+import { SelectedStockId, AddBook, Update } from './../state/stock.actions';
+import { zip, Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -12,11 +12,13 @@ import { Router, ActivatedRoute } from '@angular/router';
     templateUrl: './form.component.html',
     styleUrls: ['./form.component.scss']
 })
-export class FormComponent implements OnInit {
+export class FormComponent implements OnInit, OnDestroy {
+
     book: BookModel;
     languages: KeyValueModel[];
     genres: KeyValueModel[];
-    constructor(private store: Store<StockState>, private activateRoute: ActivatedRoute) { }
+    subscription: Subscription;
+    constructor(private store: Store<StockState>, private activateRoute: ActivatedRoute, private router: Router) { }
 
     ngOnInit() {
 
@@ -26,11 +28,10 @@ export class FormComponent implements OnInit {
             this.store.dispatch(new SelectedStockId(0));
         }
 
-        zip(this.store.pipe(select(fromStock.getGenres)),
+        this.subscription = zip(this.store.pipe(select(fromStock.getGenres)),
             this.store.pipe(select(fromStock.getLanguages)),
             this.store.pipe(select(fromStock.getBook)))
             .subscribe(([genres, languages, book]) => {
-                console.log(languages);
                 this.languages = languages;
                 this.genres = genres;
 
@@ -56,6 +57,15 @@ export class FormComponent implements OnInit {
     }
 
     onSubmit() {
-        this.store.dispatch(new AddBook(this.book));
+        if (this.activateRoute.snapshot.params.id) {
+            this.store.dispatch(new Update(this.book));
+        } else {
+            this.store.dispatch(new AddBook(this.book));
+        }
+        this.router.navigateByUrl('/stock');
+    }
+
+    ngOnDestroy(): void {
+        this.subscription.unsubscribe()
     }
 }

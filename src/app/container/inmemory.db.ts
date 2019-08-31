@@ -15,15 +15,26 @@ export class IBooksMemory implements InMemoryDbService {
                 Genre: { DisplayTitle: 'Academic', Key: 'aca' }
             },
             {
-                id: 3, Name: 'English', Price: 700,
+                id: 3, Name: 'Beautiful Disaster', Price: 500,
                 Language: { DisplayTitle: 'English', Key: 'eng' },
-                Genre: { DisplayTitle: 'Academic', Key: 'Academic' }
+                Genre: { DisplayTitle: 'Romantic', Key: 'rom' }
             },
             {
-                id: 4, Name: 'Science', Price: 220,
+                id: 4, Name: 'American Psycho', Price: 500,
                 Language: { DisplayTitle: 'English', Key: 'eng' },
+                Genre: { DisplayTitle: 'Horror', Key: 'hr' }
+            },
+            {
+                id: 5, Name: 'The Hunger Games', Price: 1000,
+                Language: { DisplayTitle: 'English', Key: 'eng' },
+                Genre: { DisplayTitle: 'Fiction', Key: 'fic' }
+            },
+            {
+                id: 6, Name: 'Basic Spanish', Price: 1000,
+                Language: { DisplayTitle: 'Spanish', Key: 'spn' },
                 Genre: { DisplayTitle: 'Academic', Key: 'aca' }
             }
+
         ];
 
         const languageData: Array<KeyValueModel> = [
