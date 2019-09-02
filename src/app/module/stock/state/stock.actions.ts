@@ -8,7 +8,7 @@ export enum StockActionTypes {
     LoadSuccess = '[Books] LoadSuccess',
     LoadFail = '[Books] LoadFail',
     SelectedStockId = '[Stocks] selectedStockId',
-    AddBookInStockSuccess = '[Stocks] Add',
+    AddBookInStockSuccess = '[Stocks] AddSuccess',
     AddBookInStockError = '[Stocks] AddError',
     Update = '[Stocks] Update',
     UpdateBookInStockSuccess = '[Stocks] UpdateSuccess',

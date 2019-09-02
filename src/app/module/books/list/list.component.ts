@@ -26,17 +26,20 @@ export class ListComponent implements OnInit, OnDestroy {
     cartItems: Array<CartModel> = [];
     booksDB: BookModel[];
     subscription: Subscription;
+    showLoading = false;
 
     constructor(private store: Store<fromRoot.State>, private shared: SharedService) { }
 
     ngOnInit() {
 
+        this.showLoading = true;
         this.books = new Array<BookModel>();
 
         this.subscription = this.store.pipe(select(fromStock.getBooks)).subscribe((resp: BookModel[]) => {
             console.log(resp);
             this.books = resp;
             this.booksDB = this.books;
+            this.showLoading = false;
         });
 
         this.store.pipe(
