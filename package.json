@@ -24,7 +24,6 @@
     "@ngrx/store-devtools": "^8.1.0",
     "angular-in-memory-web-api": "^0.8.0",
     "bootstrap": "^4.3.1",
-    "bpc-sdk": "file:../BPC.CUP/BPC.CUP.SDK",
     "font-awesome": "^4.7.0",
     "rxjs": "^6.5.2",
     "tslib": "^1.9.0",
